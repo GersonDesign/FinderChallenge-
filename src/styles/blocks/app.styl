@@ -1,0 +1,54 @@
+@import 'nib'
+.app
+    max-width 960px
+    margin 0 auto
+    		
+    	
+
+
+
+
+@media screen and (max-width: 991px)
+	.ocultar
+		display none
+	.pure-u-3-4
+		margin auto
+		width 90% !important
+	.pure-u-7-24
+		margin auto
+		width 80% !important
+	.search-form
+		margin auto
+		width 60%
+	.app
+		header
+		aside
+		content
+			display block
+			
+		aside
+			text-align center	
+			width 100%
+			h3
+				cursor pointer
+		content		
+			article
+				text-align center
+				margin-top 10px	
+			
+		
+		
+@media screen and (min-width: 992px)
+	.app
+		content
+			display flex
+    		flex-wrap wrap
+    		
+			article
+				margin 0 auto
+				width 30%
+				&:nth-of-type(4n)
+					margin-top 10px
+				figure
+					margin 0
+					text-align center
