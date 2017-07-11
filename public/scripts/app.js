@@ -1,8 +1,8 @@
 /*
   main script for only runs every function
 */
-searchForm();
 
+searchForm();
 
 $('#txtSearch').keyup(function(event){
 	var txt = $(this).val();
@@ -24,27 +24,39 @@ $('#txtSearch').keyup(function(event){
 	}else{
 		$("#btnSearch").attr('disabled','disabled');
 		$("#btnSearch").addClass('disabledSearch');
-	}
-	
+	}	
 }); 
 
 
-$('#btnBusqueda').click(function(){
-	$('#contentBusqueda').toggle('slow');
+$("#txtSearch").keypress(function(e){
+	if(e.which == 13){
+		searchPost();
+	}
 });
 
-$('#btnCategoria').click(function(){
-	$('#contentCategoria').toggle('slow');
+
+$("#btnSearch").click(function(){
+	searchPost();
 });
 
-$('#btnIdioma').click(function(){
-	$('#contentIdioma').toggle('slow');
-});
 
-$('#btnPubli').click(function(){
-	$('#contentPubli').toggle('slow');
-});
-
-$('#btnPresent').click(function(){
-	$('#contentPresent').toggle('slow');
-});
+function searchPost(){
+	var searchInput = $("#txtSearch").val();	
+	loadPOST(JSON_FILE,function(txt){
+		var data = JSON.parse(txt);
+		var datos = data.data;		
+		$.each(datos, function(k,v){
+			if(searchInput == v.title){
+				var loadData = '<article>'+
+	  								'<figure>'+
+	  									'<img src="'+v.image+'">'+
+	  								'</figure>'+
+	  								'<h3>'+v.title+'</h3>'+
+	  								'<p>'+v.teaser+'</p>'+
+	  							'</article>';
+	  			$('content').append(loadData);
+			}			
+		});
+		
+	});
+}

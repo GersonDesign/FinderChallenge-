@@ -2,21 +2,20 @@
   constants and global functions
 */
 
-var JSON_FILE = '/books_schema.json';
+var JSON_FILE = '/books-schema.json';
 
 /*
  @method loadJSON
  source: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 */
-var loadJSON = function(url, callback){
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", url, true);
-    xobj.onreadystatechange = function(responseText){
-        if(xobj.readyState == 4 && xobj.status == "200"){
-            var content = JSON.parse(xobj.responseText);
-            callback.call(this, content);
+function loadPOST(file, callback){
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function(){
+        if(rawFile.readyState === 4 && rawFile.status == "200"){
+            callback(rawFile.responseText);
         }
-    };
-    xobj.send(null);
-};
+    }
+    rawFile.send(null);
+}
